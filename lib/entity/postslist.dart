@@ -41,8 +41,25 @@ class _PostsListState extends State<PostsList> {
             child: ListView(
               //scrollDirection: Axis.vertical,
               children: [
-                Post('image/flower.jpg', '', '', ''),
-                Post('image/flower.jpg', '', '', ''),
+                Post('image/flower.jpg',
+                    'Oeschinen Lake Campground',
+                    'Kandersteg, Switzerland',
+                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                    'Alps. Situated 1,578 meters above sea level, it is one of the '
+                    'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                    'half-hour walk through pastures and pine forest, leads you to the '
+                    'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                    'enjoyed here include rowing, and riding the summer toboggan run.'),
+
+                Post('image/flower.jpg',
+                    'The Medditerian Sea',
+                    'Turkey, Belek',
+                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                        'Alps. Situated 1,578 meters above sea level, it is one of the '
+                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                        'half-hour walk through pastures and pine forest, leads you to the '
+                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                        'enjoyed here include rowing, and riding the summer toboggan run.'),
               ],
             ),
           ),
@@ -55,43 +72,51 @@ class _PostsListState extends State<PostsList> {
 class Post extends StatefulWidget {
   final String image;
   final String title;
-  final String buttons;
+  final String subtitle;
   final String text;
 
-  Post(this.image, this.title, this.buttons, this.text);
+  Post(this.image, this.title, this.subtitle, this.text);
 
   @override
-  _PostState createState() => _PostState(this.image, this.title, this.buttons, this.text);
+  _PostState createState() => _PostState(this.image, this.title, this.subtitle, this.text);
   }
 
 class _PostState extends State<Post> {
 
   final String image;
   final String title;
-  final String buttons;
+  final String subtitle;
   final String text;
 
-  _PostState(this.image, this.title, this.buttons, this.text);
+  _PostState(this.image, this.title, this.subtitle, this.text);
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Column(
-          children: [
-            imageSection,
-            titleSection,
-            buttonSection,
-            textSection,
-          ]
+            children: [
+              ImageSection(image),
+              TitleSection(title, subtitle),
+              ButtonSection(),
+              TextSection(text),
+            ]
         )
     );
   }
+}
 
-  Widget imageSection = Container(
+
+class ImageSection extends StatelessWidget {
+  final String image;
+  ImageSection(this.image);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       child: Row(
         children: <Widget>[
           Expanded(
-            child:
+              child:
               Image.asset(
                 image,
                 //widget.image,
@@ -102,68 +127,89 @@ class _PostState extends State<Post> {
           ),
         ],
       ),
-  );
+    );
+  }
+}
 
 
-  Widget titleSection = Container(
-    padding: const EdgeInsets.all(32),
-    child: Row(
-      children: <Widget>[
-        Expanded(
-          /*1*/
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              /*2*/
-              Container(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  'Oeschinen Lake Campground',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+class TitleSection extends StatelessWidget{
+  final String title;
+  final String subtitle;
+  TitleSection(this.title, this.subtitle);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            /*1*/
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /*2*/
+                Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                'Kandersteg, Switzerland',
-                style: TextStyle(
-                  color: Colors.grey[500],
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        /*3*/
-        FavoriteWidget(),
-      ],
-    ),
-  );
+          /*3*/
+          FavoriteWidget(),
+        ],
+      ),
+    );
 
-  static Color color = Colors.deepOrangeAccent;
-  Widget buttonSection = Container(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        _buildButtonColumn(color, Icons.comment, 'COMMENT'),
-        _buildButtonColumn(color, Icons.favorite_border, 'SAVE'),
-        _buildButtonColumn(color, Icons.share, 'SHARE'),
-      ],
-    ),
-  );
+  }
+}
 
 
-  Widget textSection = Container(
-    padding: const EdgeInsets.all(32),
-    child: Text(
-      'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-          'Alps. Situated 1,578 meters above sea level, it is one of the '
-          'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-          'half-hour walk through pastures and pine forest, leads you to the '
-          'lake, which warms to 20 degrees Celsius in the summer. Activities '
-          'enjoyed here include rowing, and riding the summer toboggan run.',
-      softWrap: true,
-    ),
-  );
+  Color color = Colors.deepOrangeAccent;
+  class ButtonSection extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildButtonColumn(color, Icons.comment, 'COMMENT'),
+          _buildButtonColumn(color, Icons.favorite_border, 'SAVE'),
+          _buildButtonColumn(color, Icons.share, 'SHARE'),
+        ],
+      ),
+    );
+  }
+
+  }
+
+
+class TextSection extends StatelessWidget{
+  final String text;
+  TextSection(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      child: Text(
+        text,
+        softWrap: true,
+      ),
+    );
+  }
 }
 
 
