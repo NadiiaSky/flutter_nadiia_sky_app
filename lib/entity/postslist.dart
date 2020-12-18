@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nadiiasky_flutter_app/entity/profile_drawer.dart';
 
 import '../entity/favorite.dart';
 
@@ -63,7 +64,8 @@ class _PostsListState extends State<PostsList> {
               ],
             ),
           ),
-        )
+        ),
+        drawer: ProfileDrawer(),
       ),
     );
   }
