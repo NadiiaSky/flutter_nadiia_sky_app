@@ -43,8 +43,8 @@ class _PostsListState extends State<PostsList> {
               //scrollDirection: Axis.vertical,
               children: [
                 Post('image/flower.jpg',
-                    'Oeschinen Lake Campground',
-                    'Kandersteg, Switzerland',
+                    'The Mediterranean Parkland',
+                    'Turkey, Belek',
                     'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
                     'Alps. Situated 1,578 meters above sea level, it is one of the '
                     'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
@@ -52,15 +52,34 @@ class _PostsListState extends State<PostsList> {
                     'lake, which warms to 20 degrees Celsius in the summer. Activities '
                     'enjoyed here include rowing, and riding the summer toboggan run.'),
 
-                Post('image/flower.jpg',
-                    'The Medditerian Sea',
-                    'Turkey, Belek',
+                Post('image/barcelona.jpg',
+                    'Barcelona National Art Museum',
+                    'Spain, Barcelona',
                     'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
                         'Alps. Situated 1,578 meters above sea level, it is one of the '
                         'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
                         'half-hour walk through pastures and pine forest, leads you to the '
                         'lake, which warms to 20 degrees Celsius in the summer. Activities '
                         'enjoyed here include rowing, and riding the summer toboggan run.'),
+                Post('image/museum.jpg',
+                    'The Blow Museum',
+                    'Spain, Barcelona',
+                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                        'Alps. Situated 1,578 meters above sea level, it is one of the '
+                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                        'half-hour walk through pastures and pine forest, leads you to the '
+                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                        'enjoyed here include rowing, and riding the summer toboggan run.'),
+                Post('image/attraction.JPG',
+                    'The Old City Barkino',
+                    'Spain, Barcelona',
+                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                        'Alps. Situated 1,578 meters above sea level, it is one of the '
+                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                        'half-hour walk through pastures and pine forest, leads you to the '
+                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                        'enjoyed here include rowing, and riding the summer toboggan run.'),
+
               ],
             ),
           ),
@@ -92,12 +111,32 @@ class _PostState extends State<Post> {
 
   _PostState(this.image, this.title, this.subtitle, this.text);
 
+  get widget;
+
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Column(
             children: [
-              ImageSection(image),
+              GestureDetector(
+                child: Hero(
+                  tag: widget,
+                  child: Image.asset(
+                      image,
+                      width: 600,
+                      height: 240,
+                      fit: BoxFit.cover,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_)
+                      {
+                        return ImageSection(image);
+                      }
+                  ));
+                },
+              ),
+              //ImageSection(image),
               TitleSection(title, subtitle),
               ButtonSection(),
               TextSection(text),
@@ -112,20 +151,42 @@ class ImageSection extends StatelessWidget {
   final String image;
   ImageSection(this.image);
 
+  // get widget {
+  //   for(int i = 0; i < 10; i++) {
+  //     // ignore: unnecessary_statements
+  //     "${i+1}";
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Row(
         children: <Widget>[
           Expanded(
-              child:
-              Image.asset(
-                image,
-                //widget.image,
-                width: 600,
-                height: 240,
-                fit: BoxFit.cover,
-              )
+            child: GestureDetector(
+              child: Hero(
+                tag: 'imageHero',
+                child: Image.asset(
+                    image,
+                    // width: 600,
+                    // height: 240,
+                    // fit: BoxFit.cover,
+                ),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+
+              // child:
+              // Image.asset(
+              //   image,
+              //   //widget.image,
+              //   width: 600,
+              //   height: 240,
+              //   fit: BoxFit.cover,
+              // )
           ),
         ],
       ),

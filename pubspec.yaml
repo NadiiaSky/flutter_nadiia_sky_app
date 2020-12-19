@@ -46,6 +46,9 @@ flutter:
   assets:
     - image/flower.jpg
     - image/avatar.jpg
+    - image/attraction.JPG
+    - image/museum.jpg
+    - image/barcelona.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

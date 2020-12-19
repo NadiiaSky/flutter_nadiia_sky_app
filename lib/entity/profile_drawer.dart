@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 const IconData account_circle_outlined = IconData(0xe010, fontFamily: 'MaterialIcons');
 
@@ -70,6 +71,7 @@ class ProfileDrawer extends StatelessWidget{
                   ),
                 ),
                 ListTile(
+                  contentPadding: EdgeInsets.only(top: 20, left: 20),
                   leading: Icon(Icons.assignment_ind),
                   title: Text('Main Page'),
                   onTap: () {
@@ -77,6 +79,7 @@ class ProfileDrawer extends StatelessWidget{
                   },
                 ),
                 ListTile(
+                  contentPadding: EdgeInsets.only(left: 20),
                   leading: Icon(Icons.pageview),
                   title: Text('Contacts'),
                   onTap: () {
@@ -84,6 +87,7 @@ class ProfileDrawer extends StatelessWidget{
                   },
                 ),
                 ListTile(
+                  contentPadding: EdgeInsets.only(left: 20),
                   leading: Icon(Icons.bookmark_border),
                   title: Text('Bookmark'),
                   onTap: () {
@@ -91,6 +95,7 @@ class ProfileDrawer extends StatelessWidget{
                   },
                 ),
                 ListTile(
+                  contentPadding: EdgeInsets.only(left: 20),
                   leading: Icon(Icons.brightness_5),
                   title: Text('Settings'),
                   onTap: () {
@@ -107,13 +112,15 @@ class ProfileDrawer extends StatelessWidget{
               padding: EdgeInsets.only(bottom: 20, left: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(Icons.question_answer),
-                      Text('Ask a question'),
+                      //Icon(Icons.question_answer),
+                      Text('Ask a question:'),
+                      //Text("@NadiiaSky"),
                     ],
                   ),
                   Text("@NadiiaSky"),
