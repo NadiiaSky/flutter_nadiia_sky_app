@@ -25,34 +25,10 @@ class ProfileDrawer extends StatelessWidget{
                         Expanded(
                             flex: 2,
                             child: Column(
-                              //crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              //mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                // Container(
-                                //   //margin: const EdgeInsets.only(top: 8),
-                                //   child: Text(
-                                //     'Nadiia Skyba',
-                                //     style: TextStyle(
-                                //       fontSize: 16,
-                                //       fontWeight: FontWeight.w400,
-                                //       color: Colors.white,
-                                //     ),
-                                //   ),
-                                // ),
-                                // Container(
-                                //   child: Text(
-                                //     'View profile',
-                                //     style: TextStyle(
-                                //       fontSize: 14,
-                                //       fontWeight: FontWeight.w400,
-                                //       color: Colors.white,
-                                //     ),
-                                //   ),
-                                // ),
                                 Text('Nadiia Skyba'),
                                 Text('View profile')
-
                               ],
                             )
                         )
@@ -75,6 +51,9 @@ class ProfileDrawer extends StatelessWidget{
                   leading: Icon(Icons.assignment_ind),
                   title: Text('Main Page'),
                   onTap: () {
+                    // Update the state of the app.
+                    // ...
+                    // Then close the drawer.
                     Navigator.pop(context);
                   },
                 ),

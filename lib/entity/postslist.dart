@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nadiiasky_flutter_app/entity/profile_drawer.dart';
+import 'package:nadiiasky_flutter_app/entity/saved.dart';
 
 import '../entity/favorite.dart';
-
 
 class PostsList extends StatefulWidget {
   @override
   State<PostsList> createState() => _PostsListState();
-
 }
 
 class _PostsListState extends State<PostsList> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,24 +33,28 @@ class _PostsListState extends State<PostsList> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('NadiiaSky multimedia demo'),
+          title: Text('SkyLiner multimedia'),
+          actions: [
+            IconButton(icon: Icon(Icons.linked_camera), onPressed: _pushSaved),
+          ],
         ),
         body: Center(
           child: Container(
             child: ListView(
               //scrollDirection: Axis.vertical,
               children: [
-                Post('image/flower.jpg',
+                Post(
+                    'image/flower.jpg',
                     'The Mediterranean Parkland',
                     'Turkey, Belek',
                     'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-                    'Alps. Situated 1,578 meters above sea level, it is one of the '
-                    'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-                    'half-hour walk through pastures and pine forest, leads you to the '
-                    'lake, which warms to 20 degrees Celsius in the summer. Activities '
-                    'enjoyed here include rowing, and riding the summer toboggan run.'),
-
-                Post('image/barcelona.jpg',
+                        'Alps. Situated 1,578 meters above sea level, it is one of the '
+                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                        'half-hour walk through pastures and pine forest, leads you to the '
+                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                        'enjoyed here include rowing, and riding the summer toboggan run.'),
+                Post(
+                    'image/barcelona.jpg',
                     'Barcelona National Art Museum',
                     'Spain, Barcelona',
                     'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
@@ -61,7 +63,8 @@ class _PostsListState extends State<PostsList> {
                         'half-hour walk through pastures and pine forest, leads you to the '
                         'lake, which warms to 20 degrees Celsius in the summer. Activities '
                         'enjoyed here include rowing, and riding the summer toboggan run.'),
-                Post('image/museum.jpg',
+                Post(
+                    'image/museum.jpg',
                     'The Blow Museum',
                     'Spain, Barcelona',
                     'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
@@ -70,7 +73,8 @@ class _PostsListState extends State<PostsList> {
                         'half-hour walk through pastures and pine forest, leads you to the '
                         'lake, which warms to 20 degrees Celsius in the summer. Activities '
                         'enjoyed here include rowing, and riding the summer toboggan run.'),
-                Post('image/attraction.JPG',
+                Post(
+                    'image/attraction.JPG',
                     'The Old City Barkino',
                     'Spain, Barcelona',
                     'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
@@ -79,12 +83,43 @@ class _PostsListState extends State<PostsList> {
                         'half-hour walk through pastures and pine forest, leads you to the '
                         'lake, which warms to 20 degrees Celsius in the summer. Activities '
                         'enjoyed here include rowing, and riding the summer toboggan run.'),
-
               ],
             ),
           ),
         ),
         drawer: ProfileDrawer(),
+      ),
+    );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        // ignore: missing_return
+        builder: (BuildContext context) {
+          final tiles = savedPosts.map(
+            (String title) {
+              return ListTile(
+                title: Text(
+                  title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            },
+          );
+          final divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("Saved Items"),
+            ),
+            body: ListView(children: divided),
+          );
+        },
       ),
     );
   }
@@ -99,11 +134,11 @@ class Post extends StatefulWidget {
   Post(this.image, this.title, this.subtitle, this.text);
 
   @override
-  _PostState createState() => _PostState(this.image, this.title, this.subtitle, this.text);
-  }
+  _PostState createState() =>
+      _PostState(this.image, this.title, this.subtitle, this.text);
+}
 
 class _PostState extends State<Post> {
-
   final String image;
   final String title;
   final String subtitle;
@@ -116,39 +151,34 @@ class _PostState extends State<Post> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: Column(
-            children: [
-              GestureDetector(
-                child: Hero(
-                  tag: widget,
-                  child: Image.asset(
-                      image,
-                      width: 600,
-                      height: 240,
-                      fit: BoxFit.cover,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)
-                      {
-                        return ImageSection(image);
-                      }
-                  ));
-                },
-              ),
-              //ImageSection(image),
-              TitleSection(title, subtitle),
-              ButtonSection(),
-              TextSection(text),
-            ]
-        )
-    );
+        child: Column(children: [
+      GestureDetector(
+        child: Hero(
+          tag: widget,
+          child: Image.asset(
+            image,
+            width: 600,
+            height: 240,
+            fit: BoxFit.cover,
+          ),
+        ),
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (_) {
+            return ImageSection(image);
+          }));
+        },
+      ),
+      //ImageSection(image),
+      TitleSection(title, subtitle),
+      ButtonSection(title),
+      TextSection(text),
+    ]));
   }
 }
 
-
 class ImageSection extends StatelessWidget {
   final String image;
+
   ImageSection(this.image);
 
   // get widget {
@@ -168,25 +198,13 @@ class ImageSection extends StatelessWidget {
               child: Hero(
                 tag: 'imageHero',
                 child: Image.asset(
-                    image,
-                    // width: 600,
-                    // height: 240,
-                    // fit: BoxFit.cover,
+                  image,
                 ),
               ),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
-
-              // child:
-              // Image.asset(
-              //   image,
-              //   //widget.image,
-              //   width: 600,
-              //   height: 240,
-              //   fit: BoxFit.cover,
-              // )
           ),
         ],
       ),
@@ -194,10 +212,10 @@ class ImageSection extends StatelessWidget {
   }
 }
 
-
-class TitleSection extends StatelessWidget{
+class TitleSection extends StatelessWidget {
   final String title;
   final String subtitle;
+
   TitleSection(this.title, this.subtitle);
 
   @override
@@ -235,13 +253,16 @@ class TitleSection extends StatelessWidget{
         ],
       ),
     );
-
   }
 }
 
+Color color = Colors.deepOrangeAccent;
 
-  Color color = Colors.deepOrangeAccent;
-  class ButtonSection extends StatelessWidget{
+class ButtonSection extends StatelessWidget {
+  final String title;
+
+  ButtonSection(this.title);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -249,18 +270,18 @@ class TitleSection extends StatelessWidget{
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildButtonColumn(color, Icons.comment, 'COMMENT'),
-          _buildButtonColumn(color, Icons.favorite_border, 'SAVE'),
+          //_buildButtonColumn(color, Icons.favorite_border, 'SAVE'),
+          SavedWidget(title),
           _buildButtonColumn(color, Icons.share, 'SHARE'),
         ],
       ),
     );
   }
+}
 
-  }
-
-
-class TextSection extends StatelessWidget{
+class TextSection extends StatelessWidget {
   final String text;
+
   TextSection(this.text);
 
   @override
@@ -274,7 +295,6 @@ class TextSection extends StatelessWidget{
     );
   }
 }
-
 
 Column _buildButtonColumn(Color color, IconData icon, String label) {
   return Column(
@@ -296,4 +316,3 @@ Column _buildButtonColumn(Color color, IconData icon, String label) {
     ],
   );
 }
-
