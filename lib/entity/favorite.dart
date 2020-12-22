@@ -10,7 +10,7 @@ class FavoriteWidget extends StatefulWidget {
 
 class _FavoriteWidgetState extends State<FavoriteWidget> {
   bool _isFavorited = true;
-  var _favoriteCount = new Random().nextInt(100) + 1;
+  var _favoriteCount = new Random().nextInt(99) + 1;
 
   void _toggleFavorite() {
     setState(() {
@@ -34,7 +34,9 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
           child: IconButton(
             padding: EdgeInsets.all(0),
             alignment: Alignment.centerRight,
-            icon: (_isFavorited ? Icon(Icons.favorite) : Icon(Icons.favorite_border)),
+            icon: (_isFavorited
+                ? Icon(Icons.favorite)
+                : Icon(Icons.favorite_border)),
             color: Colors.red[500],
             onPressed: _toggleFavorite,
           ),
@@ -45,7 +47,6 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
             child: Text('$_favoriteCount'),
           ),
         ),
-
       ],
     );
   }

@@ -13,82 +13,63 @@ class PostsList extends StatefulWidget {
 class _PostsListState extends State<PostsList> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.dark,
-        primaryColor: Colors.red[800],
-        accentColor: Colors.cyan[600],
-
-        // Define the default font family.
-        fontFamily: 'Georgia',
-
-        // Define the default TextTheme. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
-        textTheme: TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('SkyLiner multimedia'),
+        actions: [
+          IconButton(icon: Icon(Icons.linked_camera), onPressed: _pushSaved),
+        ],
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('SkyLiner multimedia'),
-          actions: [
-            IconButton(icon: Icon(Icons.linked_camera), onPressed: _pushSaved),
-          ],
-        ),
-        body: Center(
-          child: Container(
-            child: ListView(
-              //scrollDirection: Axis.vertical,
-              children: [
-                Post(
-                    'image/flower.jpg',
-                    'The Mediterranean Parkland',
-                    'Turkey, Belek',
-                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-                        'Alps. Situated 1,578 meters above sea level, it is one of the '
-                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-                        'half-hour walk through pastures and pine forest, leads you to the '
-                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
-                        'enjoyed here include rowing, and riding the summer toboggan run.'),
-                Post(
-                    'image/barcelona.jpg',
-                    'Barcelona National Art Museum',
-                    'Spain, Barcelona',
-                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-                        'Alps. Situated 1,578 meters above sea level, it is one of the '
-                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-                        'half-hour walk through pastures and pine forest, leads you to the '
-                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
-                        'enjoyed here include rowing, and riding the summer toboggan run.'),
-                Post(
-                    'image/museum.jpg',
-                    'The Blow Museum',
-                    'Spain, Barcelona',
-                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-                        'Alps. Situated 1,578 meters above sea level, it is one of the '
-                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-                        'half-hour walk through pastures and pine forest, leads you to the '
-                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
-                        'enjoyed here include rowing, and riding the summer toboggan run.'),
-                Post(
-                    'image/attraction.JPG',
-                    'The Old City Barkino',
-                    'Spain, Barcelona',
-                    'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-                        'Alps. Situated 1,578 meters above sea level, it is one of the '
-                        'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-                        'half-hour walk through pastures and pine forest, leads you to the '
-                        'lake, which warms to 20 degrees Celsius in the summer. Activities '
-                        'enjoyed here include rowing, and riding the summer toboggan run.'),
-              ],
-            ),
+      body: Center(
+        child: Container(
+          child: ListView(
+            //scrollDirection: Axis.vertical,
+            children: [
+              Post(
+                  'image/flower.jpg',
+                  'The Mediterranean Parkland',
+                  'Turkey, Belek',
+                  'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                      'Alps. Situated 1,578 meters above sea level, it is one of the '
+                      'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                      'half-hour walk through pastures and pine forest, leads you to the '
+                      'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                      'enjoyed here include rowing, and riding the summer toboggan run.'),
+              Post(
+                  'image/barcelona.jpg',
+                  'Barcelona National Art Museum',
+                  'Spain, Barcelona',
+                  'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                      'Alps. Situated 1,578 meters above sea level, it is one of the '
+                      'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                      'half-hour walk through pastures and pine forest, leads you to the '
+                      'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                      'enjoyed here include rowing, and riding the summer toboggan run.'),
+              Post(
+                  'image/museum.jpg',
+                  'The Blow Museum',
+                  'Spain, Barcelona',
+                  'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                      'Alps. Situated 1,578 meters above sea level, it is one of the '
+                      'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                      'half-hour walk through pastures and pine forest, leads you to the '
+                      'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                      'enjoyed here include rowing, and riding the summer toboggan run.'),
+              Post(
+                  'image/attraction.JPG',
+                  'The Old City Barkino',
+                  'Spain, Barcelona',
+                  'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
+                      'Alps. Situated 1,578 meters above sea level, it is one of the '
+                      'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
+                      'half-hour walk through pastures and pine forest, leads you to the '
+                      'lake, which warms to 20 degrees Celsius in the summer. Activities '
+                      'enjoyed here include rowing, and riding the summer toboggan run.'),
+            ],
           ),
         ),
-        drawer: ProfileDrawer(),
       ),
+      drawer: ProfileDrawer(),
     );
   }
 

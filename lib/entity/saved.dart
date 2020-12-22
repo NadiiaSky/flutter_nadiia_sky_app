@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class SavedWidget extends StatefulWidget {
   final String title;
+
   SavedWidget(this.title);
 
   @override
@@ -32,7 +32,7 @@ class _SavedWidgetState extends State<SavedWidget> {
       },
       child: Icon(
         _isSaved ? Icons.favorite : Icons.favorite_border,
-          color: _isSaved ? color : null,
+        color: _isSaved ? color : null,
       ),
     );
   }
@@ -41,25 +41,24 @@ class _SavedWidgetState extends State<SavedWidget> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Icon(Icons.favorite_border, color: color),
-        buildPost(),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            'SAVE',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Icon(Icons.favorite_border, color: color),
+          buildPost(),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Text(
+              'SAVE',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: color,
+              ),
             ),
           ),
-        ),
-      ],
-    ),
+        ],
+      ),
     );
   }
 }
-
