@@ -10,7 +10,7 @@ class SavedWidget extends StatefulWidget {
   _SavedWidgetState createState() => _SavedWidgetState(this.title);
 }
 
-final savedPosts = Set<String>();
+var savedPosts = Set<String>();
 Color color = Colors.deepOrangeAccent;
 
 class _SavedWidgetState extends State<SavedWidget> {
@@ -39,6 +39,9 @@ class _SavedWidgetState extends State<SavedWidget> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      savedPosts ??= ModalRoute.of(context).settings.arguments;
+    });
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.min,

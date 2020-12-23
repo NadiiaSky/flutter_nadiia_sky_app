@@ -1,7 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 
 class AppModel with ChangeNotifier {
+
+  String _text;
+  String get text => _text;
+
+  set text(String value) {
+    _text = value;
+    notifyListeners();
+  }
+
   Widget _page;
   bool _isMainPage;
   String _tile;

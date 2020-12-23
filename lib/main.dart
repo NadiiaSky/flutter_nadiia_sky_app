@@ -8,10 +8,13 @@ import 'package:nadiiasky_flutter_app/entity/saved.dart';
 import 'package:nadiiasky_flutter_app/model/AppModel.dart';
 import 'package:provider/provider.dart';
 
+import 'menu/bookmark.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  String title;
+  //String title;
+  //String text;
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<AppModel>(
@@ -34,14 +37,15 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
           ),
         ),
+        initialRoute: '/',
         routes: {
-          '/bookmark': (context) => SavedWidget(title),
+          '/': (context) => PostsList(),
+          '/bookmark': (context) => Bookmark(),
         },
-        home: Scaffold(
-          body: MyConsumer(),
-          //drawer: ProfileDrawer(),
-        ),
-        //MyConsumer(),
+        // home: Scaffold(
+        //   body: MyConsumer(),
+        //   //drawer: ProfileDrawer(),
+        // ),
       ),
     );
   }

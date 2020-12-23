@@ -3,11 +3,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nadiiasky_flutter_app/entity/postslist.dart';
 import 'package:nadiiasky_flutter_app/entity/saved.dart';
+import 'package:nadiiasky_flutter_app/menu/bookmark.dart';
 import 'package:nadiiasky_flutter_app/model/AppModel.dart';
 import 'package:provider/provider.dart';
 
 const IconData account_circle_outlined =
-    IconData(0xe010, fontFamily: 'MaterialIcons');
+IconData(0xe010, fontFamily: 'MaterialIcons');
 
 class ProfileDrawer extends StatefulWidget {
   @override
@@ -62,11 +63,17 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
                   title: Text('Main Page'),
                   onTap: () {
                     // Update the state of the app.
-                    Provider.of<AppModel>(context, listen: false).isMainPage =
-                        true;
-                    Provider.of<AppModel>(context, listen: false).page =
+                    Provider
+                        .of<AppModel>(context, listen: false)
+                        .isMainPage =
+                    true;
+                    Provider
+                        .of<AppModel>(context, listen: false)
+                        .page =
                         PostsList();
-                    Provider.of<AppModel>(context, listen: false).tile = "";
+                    Provider
+                        .of<AppModel>(context, listen: false)
+                        .tile = "";
                     // Then close the drawer.
                     Navigator.pop(context);
                   },
@@ -79,29 +86,17 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
                     Navigator.pop(context);
                   },
                 ),
-                ListTile(
-                  contentPadding: EdgeInsets.only(left: 20),
-                  leading: Icon(Icons.bookmark_border),
-                  title: Text('Bookmark'),
-                  onTap: () {
-                    // Update the state of the app.
-                    Provider.of<AppModel>(context, listen: false).isMainPage =
-                        false;
-                    // Provider.of<AppModel>(context, listen: false).page =
-                    //     _pushSaved();
-                    Provider.of<AppModel>(context, listen: false).tile =
-                        "Bookmark";
-                    Navigator.of(context).push(
-                        MaterialPageRoute<void>(
-                            // ignore: missing_return
-                            builder: (BuildContext context){
-                             // _pushSaved();
-                              Provider.of<AppModel>(context, listen: false).page = _pushSaved();
-                            },
-                        ),
+                Consumer<AppModel>(
+                  builder: (context, model, child) {
+                    return ListTile(
+                      contentPadding: EdgeInsets.only(left: 20),
+                      leading: Icon(Icons.bookmark_border),
+                      title: Text('Bookmark'),
+                      onTap: () {
+                        // Update the state of the app.
+                        saveText(context);
+                      },
                     );
-                    // Then close the drawer.
-                    Navigator.pop(context);
                   },
                 ),
                 ListTile(
@@ -141,34 +136,18 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
       ),
     );
   }
-
-  Widget _pushSaved() {
-    final tiles = savedPosts.map(
-      (String title) {
-        return ListTile(
-          title: Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        );
-      },
-    );
-    final divided = ListTile.divideTiles(
-      context: context,
-      tiles: tiles,
-    ).toList();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Saved Items"),
-      ),
-      body: ListView(children: divided),
-    );
-  }
 }
 
-Widget profilePhoto() => Stack(
+  Future<void> saveText(BuildContext context) async {
+    await Navigator.pushNamed(
+        context, '/bookmark',
+    arguments: Provider.of<AppModel>(context, listen: false).text
+    );
+  }
+
+
+Widget profilePhoto() =>
+    Stack(
       alignment: const Alignment(0.6, 0.6),
       children: [
         CircleAvatar(
