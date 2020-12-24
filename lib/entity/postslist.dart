@@ -76,7 +76,6 @@ class _PostsListState extends State<PostsList> {
   void _pushSaved() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        // ignore: missing_return
         builder: (BuildContext context) {
           final tiles = savedPosts.map(
             (String title) {
