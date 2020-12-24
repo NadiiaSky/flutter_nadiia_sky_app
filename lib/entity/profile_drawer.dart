@@ -83,7 +83,8 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
                   leading: Icon(Icons.pageview),
                   title: Text('Contacts'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/contacts');
+                    //Navigator.pop(context);
                   },
                 ),
                 Consumer<AppModel>(

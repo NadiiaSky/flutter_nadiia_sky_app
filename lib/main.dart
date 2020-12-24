@@ -1,6 +1,7 @@
 // Nadiia Skyba, TI-72. All rights reserved.
 
 import 'package:nadiiasky_flutter_app/consumer/consumer.dart';
+import 'package:nadiiasky_flutter_app/entity/contact.dart';
 import 'package:nadiiasky_flutter_app/entity/postslist.dart';
 import 'package:flutter/material.dart';
 import 'package:nadiiasky_flutter_app/entity/profile_drawer.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => PostsList(),
           '/bookmark': (context) => Bookmark(),
+          '/contacts': (context) => Contact(),
         },
         // home: Scaffold(
         //   body: MyConsumer(),

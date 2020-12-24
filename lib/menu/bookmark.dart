@@ -38,7 +38,6 @@ class _BookmarkState extends State<Bookmark> {
                 title: Text(
                     tiles
                 ),
-
               )
             ],
             ),
