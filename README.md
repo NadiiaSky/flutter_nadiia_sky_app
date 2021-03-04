@@ -1,6 +1,8 @@
 # nadiiasky_flutter_app
 
 A new Flutter application.
+The result of finished project you can see on lab4 branch in results app folder.
+
 
 ## Getting Started
 
